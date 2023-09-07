@@ -1,0 +1,11 @@
+{
+  "name": "js-cp-diploma",
+  "version": "1.0.0",
+  "description": "Дипломная работа Нетология Цифровые профессии Frontend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "NKamelin",
+  "license": "ISC"
+}
