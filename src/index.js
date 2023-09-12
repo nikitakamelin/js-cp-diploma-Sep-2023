@@ -26,15 +26,18 @@ const pageNavDays = [...document.querySelectorAll('.page-nav__day')];
 
 // -- добавим классы текущему дню
 ['page-nav__day_today','page-nav__day_chosen'].map(cl => pageNavDays[0].classList.add(cl));
+
 // -- добавим специальный класс уикенду
 pageNavDays[5].classList.add('page-nav__day_weekend');
 pageNavDays[6].classList.add('page-nav__day_weekend');
 
+//-------------------------------------------------------------------------------------------------------
 // -- обработчик клика по панели навигации
 const checkoutDay = (item) => {
 	item.addEventListener('click', (e) => {
 		e.preventDefault();
 
+		// -- извлекаем дату, на которую кликнул юзер в панели навигации
 		const targetDay = item.querySelector('.page-nav__day-number').innerText;
 		const targetDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), Number(targetDay));
 
@@ -49,6 +52,7 @@ const checkoutDay = (item) => {
 	})
 }
 pageNavDays.forEach(checkoutDay);
+//-------------------------------------------------------------------------------------------------------
 
 // -- отрисовка блока main 
 fetchData('event=update').then(data => {
