@@ -8,8 +8,7 @@ console.log('started')
 const currentDate = new Date();
 const ArrayWeekDayNames = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 
-console.log('-----------------------------------------------------------------------------------------------------')
-
+//-------------------------------------------------------------------------------------------------------
 // -- отрисовываем панель навигации <nav></nav>
 for (let i = 0; i < 7; i++) {
 	
@@ -21,7 +20,7 @@ for (let i = 0; i < 7; i++) {
 
 	document.querySelector('nav').insertAdjacentHTML('beforeend', innerHTML);
 }
-//*-------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------
 
 const pageNavDays = [...document.querySelectorAll('.page-nav__day')];
 
@@ -39,7 +38,6 @@ const checkoutDay = (item) => {
 		const targetDay = item.querySelector('.page-nav__day-number').innerText;
 		const targetDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), Number(targetDay));
 
-		//console.log(targetDate);
 		// -- отрисовка блока main 
 		document.querySelector('main').innerHTML = '';
 		fetchData('event=update').then(data => {
@@ -52,25 +50,9 @@ const checkoutDay = (item) => {
 }
 pageNavDays.forEach(checkoutDay);
 
-
-// fetch('http://jsonplaceholder.typicode.com/posts')
-// 	.then((response) => response.json())
-// 	.then((data) => console.log(data[1]))
-
-// let fetchData = fetch('event=update');
-
 // -- отрисовка блока main 
 fetchData('event=update').then(data => {
 	const today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
 	renderMain(data, today);
 })
-
-
-	
-
-
-
-//console.log(currentDate.getDate())
-//console.log(currentDate.getTime())
-// 1660475730000
 
