@@ -18,6 +18,10 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './src/index.html'
 		}),
+		new HtmlWebpackPlugin({
+			filename: 'hall.html',
+			template: './src/html/hall.html'
+		}),
 		new MiniCSSExtractPlugin()
 	]
 }

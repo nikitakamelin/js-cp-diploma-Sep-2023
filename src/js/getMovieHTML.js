@@ -1,6 +1,8 @@
 const fetchData = JSON.parse(window.localStorage.getItem('fetchData'));
+const currentDate = new Date();
+//const today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
 
-export function getMovieHTML(movie) {
+export function getMovieHTML(movie, targetDate) {
 
 	const movieInfo = `
 	<div class="movie__info">
@@ -19,7 +21,7 @@ export function getMovieHTML(movie) {
 	</div>`;
 
 
-	let filteredArraySeances = fetchData.seances.result.filter(item => item.seance_filmid === movie.film_id);
+	const filteredArraySeances = fetchData.seances.result.filter(item => item.seance_filmid === movie.film_id);
 	let seances = ``;
 
 
@@ -31,7 +33,27 @@ export function getMovieHTML(movie) {
 				let a1 = `<div class="movie-seances__hall"><h3 class="movie-seances__hall-title">${hall.hall_name}</h3><ul class="movie-seances__list">`
 				let a2 = ``;
 				filteredArrayHalls.forEach(item => {
-					a2 += `<li class="movie-seances__time-block"><a class="movie-seances__time" href="hall.html">${item.seance_time}</a></li>`
+					const absoluteSeanceEnd = targetDate.getTime() + Number(item.seance_end*60*1000);
+		
+					//console.log(new Date(absoluteSeanceEnd))
+
+					if (currentDate.getTime() < absoluteSeanceEnd) {
+						//console.log(new Date(absoluteSeanceEnd))
+						a2 += `<li class="movie-seances__time-block"><a class="movie-seances__time" href="hall.html">${item.seance_time}</a></li>`;
+					} else {
+						//console.log(targetDate.getDate())
+						a2 += `<li class="movie-seances__time-block"><a class="movie-seances__time acceptin-button-disabled" href="hall.html">${item.seance_time}</a></li>`;
+					}
+
+
+					//
+					// if (currentDate.getTime()-7200000 < today.getTime()+Number(item.seance_end*60*1000)) {
+					// 	console.log(targetDate.getDate())
+					// 	a2 += `<li class="movie-seances__time-block"><a class="movie-seances__time" href="hall.html">${item.seance_time}</a></li>`;
+					// } else {
+					// 	console.log(targetDate.getDate())
+					// 	a2 += `<li class="movie-seances__time-block"><a class="movie-seances__time acceptin-button-disabled" href="hall.html">${item.seance_time}</a></li>`;
+					// }
 				})
 				let a3 = `</ul></div>`;
 
